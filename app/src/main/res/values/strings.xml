@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">clases</string>
+    <string name="name_team1">TEAM A</string>
+
+    <string name="add_score">+1 GOL</string>
+    <string name="name_team2">TEAM B</string>
+
+</resources>
