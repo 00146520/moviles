@@ -26,13 +26,27 @@ class MainActivity : AppCompatActivity() {
         //aparece en rojo al principio pero se soluciona con alt + enter
         //dentro del parentesis va la variable y el mensaje
         Log.d(TAG, "onCreate")
+        //se pregunta si el bundle existe (datos guardados)
+        //savedInstanceState?.let{ bundle ->
+        //scoreTeamA = bundle.getInt(KEY_SCORE_TEAM_A,0)
+        //scoreTeamB = bundle.getInt(KEY_SCORE_TEAM_B,0)
+        //} se corta y pega en setupScores
+
         //se pasa el bind
         bind()
         //se llama la funcion score
-        setupScores()
+        setupScores(savedInstanceState)
         //se llama la funcion addListeners
         addListeners()
     }
+    //crear nueva funcion para ayudar que los datos se guarden incluso cambiando orientacion
+    //se utiliza el onSaveInstanceState con un parametro
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_SCORE_TEAM_A, scoreTeamA)
+        outState.putInt(KEY_SCORE_TEAM_B, scoreTeamB)
+    }
+
     //se crean los listeners
     private fun addListeners(){
         //button del equipo A
@@ -53,7 +67,11 @@ class MainActivity : AppCompatActivity() {
         view.text = score.toString()
     }
     //se crea la funcion para colocar puntuajes
-    private fun setupScores(){
+    private fun setupScores(savedInstanceState: Bundle?) {
+        savedInstanceState?.let{ bundle ->
+            scoreTeamA = bundle.getInt(KEY_SCORE_TEAM_A,0)
+            scoreTeamB = bundle.getInt(KEY_SCORE_TEAM_B,0)
+        }
         //se coloca el toString porque si se deja con 0 (teamSScoreTextView.text = 0) da error porque 0 no es string
        // teamAScoreTextView.text = scoreTeamA.toString()
        // teamBScoreTextView.text = scoreTeamB.toString()
@@ -108,6 +126,9 @@ class MainActivity : AppCompatActivity() {
     companion object{
         //variables que no queremos que se instancien
         val TAG = MainActivity::class.simpleName   //guarda el valor de la clase MainActivity
+        //declarando key
+        private const val KEY_SCORE_TEAM_A = "ScoreTeamA"
+        private const val KEY_SCORE_TEAM_B = "ScoreTeamB"
     }
 
 }
