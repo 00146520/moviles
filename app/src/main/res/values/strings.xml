@@ -4,5 +4,8 @@
 
     <string name="add_score">+1 GOL</string>
     <string name="name_team2">TEAM B</string>
+    <string name="action_save">Guardar</string>
+    <string name="text_winner">Ganador</string>
+    <string name="text_loser">Perdedor</string>
 
 </resources>

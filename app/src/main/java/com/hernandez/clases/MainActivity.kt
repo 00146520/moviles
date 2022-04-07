@@ -1,5 +1,6 @@
 package com.hernandez.clases
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     //agregando para los score del equipo B
     private lateinit var teamBScoreTextView: TextView
     private lateinit var teamBAddButton: Button
+    //agregando la variable para el boton guardar
+    private lateinit var saveButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         //button del equipo A
         teamAAddButton.setOnClickListener{
             //suma uno
-            scoreTeamA++
+            scoreTeamA=scoreTeamA+1
             //se llama la funcion updateScore y se pasan los argumentos
             updateVisualScore(teamAScoreTextView, scoreTeamA)
         }
@@ -61,7 +64,21 @@ class MainActivity : AppCompatActivity() {
             scoreTeamB++
             updateVisualScore(teamBScoreTextView,scoreTeamB)
         }
+        //funcionalidad del boton guardar
+        saveButton.setOnClickListener{
+            onSave()
+        }
     }
+    //se crea una funcion para guardar los resultados
+    private fun onSave(){
+        //se hace el enlace para poder pasar al ScoreActivity
+        val intent = Intent(this,ScoreActivity::class.java)
+        //se crea un Intent.putExtra para pasar los datos al otro activity
+        intent.putExtra(KEY_SCORE_TEAM_A,scoreTeamA)
+        intent.putExtra(KEY_SCORE_TEAM_B,scoreTeamB)
+        startActivity(intent)
+    }
+
     //se crea la funcion updateScore para que el marcador vaya cambiando
     private fun updateVisualScore (view: TextView, score: Int){
         view.text = score.toString()
@@ -95,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         //la variable del button del equipo B
         //de argumento se pasa el id del Button donde se suma la puntuacion del equipo B
         teamBAddButton = findViewById(R.id.action_add_one_team_b)
+        //variable que va encontrar el boton save
+        saveButton = findViewById(R.id.action_save)
     }
 
 //siempre usar el super
@@ -127,8 +146,11 @@ class MainActivity : AppCompatActivity() {
         //variables que no queremos que se instancien
         val TAG = MainActivity::class.simpleName   //guarda el valor de la clase MainActivity
         //declarando key
-        private const val KEY_SCORE_TEAM_A = "ScoreTeamA"
-        private const val KEY_SCORE_TEAM_B = "ScoreTeamB"
+        //private const val KEY_SCORE_TEAM_A = "ScoreTeamA"
+        //private const val KEY_SCORE_TEAM_B = "ScoreTeamB"
+        //se quita el private para que esos datos sean visibles en el ScoreActivity
+        const val KEY_SCORE_TEAM_A = "ScoreTeamA"
+        const val KEY_SCORE_TEAM_B = "ScoreTeamB"
     }
 
 }
