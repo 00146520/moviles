@@ -1,4 +1,4 @@
-package com.hernandez.clases
+package com.hernandez.fragment
 
 import org.junit.Test
 

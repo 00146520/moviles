@@ -1,66 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical"
-    >
+    tools:context=".MainActivity">
 
-    <!--Se puede declarar mas de un LinearLayout dentro de otro-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_gap"
-            android:text="@string/name_team1"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"></TextView>
-        <!--tools:text... hace una vista previa y se puede dejar quemado-->
-        <TextView
-            android:id="@+id/score_team_a_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="0"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"></TextView>
-
-        <Button
-            android:id="@+id/action_add_one_team_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_gap"
-            android:text="@string/add_score"></Button>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_gap"
-            android:text="@string/name_team2"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"></TextView>
-        <!--tools:text... hace una vista previa y se puede dejar quemado-->
-        <TextView
-            android:id="@+id/score_team_b_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="0"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"></TextView>
-        <Button
-            android:id="@+id/action_add_one_team_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_score"
-            android:layout_marginTop="@dimen/default_gap"></Button>
-    </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <!--utilizar fragment para enlazar el greetingfragment-->
+    <fragment
+        android:id="@+id/greeting_1"
+        android:name="com.hernandez.fragment.GreetingFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:layout="@layout/fragment_greeting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+<!--El tools layout fragment_greeting se ocupa para una vista previa del texto-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+    <!--en name se pone el nombre del fragmento-->
+</androidx.constraintlayout.widget.ConstraintLayout>
